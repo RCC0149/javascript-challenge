@@ -18,29 +18,34 @@ function runEnter() {
   
     // Get the value property of the input element
     var inputValue = inputElement.property("value");
+
+    // Use D3 to select the table body
+    var tbody = d3.select("tbody");
+
+    // Remove previously viewed sightings table data
+    tbody.html("");
+
+    // Loop through an array of sightings and build the entire table body from scratch
+
+    // Call the custom function with filter()
+    var filterSightings = tableData.filter(sightings => sightings.datetime == inputValue);
+
+    // Iterate through each sighting on the specific date input
+    filterSightings.forEach((fs) => {
+
+        // Append one table row per sighting
+        var row = tbody.append("tr");
+
+        // Append row data concerning the sighting
+        row.append("td").text(fs.datetime);
+        row.append("td").text(fs.city);
+        row.append("td").text(fs.state);
+        row.append("td").text(fs.country);
+        row.append("td").text(fs.shape);
+        row.append("td").text(fs.durationMinutes);
+        row.append("td").text(fs.comments);
+  
+    });
+
 };
 
-// Use D3 to select the table body
-var tbody = d3.select("tbody");
-
-// Loop through an array of sightings and build the entire table body from scratch
-
-// Call the custom function with filter()
-var filterSightings = tableData.filter(sightings => sightings.datetime == {inputValue});
-
-// Iterate through each sighting on the specific date input
-filterSightings.forEach(([datetime]) => {
-
-    // Append one table row per sighting
-    var row = tbody.append("tr");
-
-    // Append row data concerning the sighting
-    row.append("td").text(datetime);
-    row.append("td").text(city);
-    row.append("td").text(state);
-    row.append("td").text(country);
-    row.append("td").text(shape);
-    row.append("td").text(durationMinutes);
-    row.append("td").text(comments);
-  
-});
